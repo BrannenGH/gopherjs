@@ -35,3 +35,11 @@ func TestOpen(t *testing.T) {
 		t.Fatalf("syscall.Close() returned error: %s", err)
 	}
 }
+
+func TestGetRawSockaddrUnix(t *testing.T) {
+	maxUnixSocketPathSize := syscall.RawSockaddrUnix{}.Path
+
+	if maxUnixSocketPathSize[0] == 0 {
+		t.Fail()
+	}
+}
