@@ -1,0 +1,48 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "NPM and Go install",
+      "type": "shell",
+      "command": "npm install --no-optional --no-package-lock && go install -v",
+      "problemMatcher": [],
+      "isBackground": true,
+      "runOptions": { "runOn": "folderOpen" },
+      "presentation": { "reveal": "never" }
+    },
+    {
+      "label": "Build",
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "go build .",
+      "isBackground": false,
+      "presentation": {"reveal": "always"}
+    },
+    {
+      "label": "GopherJS Test",
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "gopherjs test -v ${input:moduleFileDirectory}",
+      "isBackground": false,
+      "presentation": {"reveal": "always"},
+      "dependsOn": ["Build"]
+    },
+    {
+      "label": "Go Test",
+      "type": "shell",
+      "problemMatcher": [],
+      "command": "go test -v ${input:moduleFileDirectory}",
+      "isBackground": false,
+      "presentation": {"reveal": "always"},
+      "dependsOn": ["Build"]
+    }
+  ],
+  "inputs": [
+    {
+        "id": "moduleFileDirectory",
+        "description": "Go modules, files, or directories",
+        "default": "./tests/",
+        "type": "promptString"
+    },
+  ]
+}

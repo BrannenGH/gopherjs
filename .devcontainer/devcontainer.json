@@ -1,0 +1,24 @@
+{
+  "name": "GopherJS Development Environment",
+  "dockerFile": "./go-1.18.6/Dockerfile",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "gopls": {
+          "build.buildFlags": ["-tags=js"]
+        }
+      },
+      "extensions": [
+        "golang.go",
+        "ms-vscode-remote.remote-containers"
+      ]
+    }
+  },
+  "portsAttributes": {
+    "9000": {
+      "label": "Hello Remote World",
+      "onAutoForward": "notify"
+    }
+  }
+}
