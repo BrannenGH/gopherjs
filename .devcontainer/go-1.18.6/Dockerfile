@@ -1,13 +1,18 @@
 FROM buildpack-deps:stable
 
+# INSTALL CLI TOOLS
+
+RUN apt update
+
+# Install less, zsh, and sudo
+RUN apt install -y less sudo zsh
+
 # ADD NODE USER
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
 # CREATE A DEV USER
 RUN apt update
-
-RUN apt install -y sudo zsh
 
 RUN groupadd wheel
 
@@ -205,4 +210,4 @@ RUN /bin/sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/m
 RUN echo 'export PATH="$HOME/go/bin:$PATH"' >> $HOME/.zshrc 
 RUN echo 'export GO111MODULE=on' >> $HOME/.zshrc
 RUN echo 'export SOURCE_MAP_SUPPORT=true' >> $HOME/.zshrc
-RUN echo "export NODE_PATH=$(npm root)" >> $HOME/.zshrc
+#RUN echo "export NODE_PATH=$(npm root)" >> $HOME/.zshrc
